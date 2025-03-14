@@ -37,3 +37,8 @@ If you want to your own files from xenonrecomp for the project
 14. go back to the built xenonrecomp folder, open a cmd there and do ./xenonrecomp config.toml insert directory you copied in step 13\ppc_context.h 
 
 15. in the out folder you made it should now have over 600 .cpp files and 3 .h files which you will use to compile the game once its in a compilable state (this is where im floundering about)
+
+
+Things that need to be done
+--------------------------------
+implement missing as well as make the game actually run 
