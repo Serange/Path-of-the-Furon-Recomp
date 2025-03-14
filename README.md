@@ -41,4 +41,4 @@ If you want to your own files from xenonrecomp for the project
 
 Things that need to be done
 --------------------------------
-implement missing as well as make the game actually run 
+implement missing functions such as audio/video drivers and whatnot as well as make the game actually run 
