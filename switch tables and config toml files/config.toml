@@ -21,8 +21,8 @@ savevmx_14_address = 0x82FF1540
 restvmx_64_address = 0x82FF186C
 savevmx_64_address = 0x82FF15D4
 
-longjmp_address = 0x833B7F94
-setjmp_address = 0x833B7F98
+longjmp_address = 0x833B7FA4
+setjmp_address = 0x82CC42C8
 
 functions = [
     { address = 0x82DD4CC0, size = 0x110 },
