@@ -17881,7 +17881,7 @@ loc_82FF214C:
 	ctx.r4.u64 = PPC_LOAD_U32(ctx.r7.u32 + 4);
 	// bl 0x833b7f94
 	ctx.lr = 0x82FF2164;
-	__imp__RtlUnwind(ctx, base);
+	longjmp(*reinterpret_cast<jmp_buf*>(base + ctx.r3.u32), ctx.r4.s32);
 	// lwz r0,8(r1)
 	ctx.r0.u64 = PPC_LOAD_U32(ctx.r1.u32 + 8);
 	// mtlr r0

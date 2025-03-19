@@ -14966,7 +14966,7 @@ PPC_FUNC_IMPL(__imp__sub_82CC42A0) {
 	ctx.r6.s64 = 0;
 	// bl 0x833b7f94
 	ctx.lr = 0x82CC42B8;
-	__imp__RtlUnwind(ctx, base);
+	longjmp(*reinterpret_cast<jmp_buf*>(base + ctx.r3.u32), ctx.r4.s32);
 	// mtlr r31
 	ctx.lr = ctx.r31.u64;
 	// ld r31,8(r1)

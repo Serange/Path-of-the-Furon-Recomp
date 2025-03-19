@@ -16774,7 +16774,7 @@ loc_82CD0E1C:
 loc_82CD0E60:
 	// bl 0x833b7fa4
 	ctx.lr = 0x82CD0E64;
-	longjmp(*reinterpret_cast<jmp_buf*>(base + ctx.r3.u32), ctx.r4.s32);
+	__imp__KeEnableFpuExceptions(ctx, base);
 	// mr r3,r31
 	ctx.r3.u64 = ctx.r31.u64;
 	// addi r1,r1,96
