@@ -25,7 +25,7 @@ longjmp_address = 0x82FF1E60
 setjmp_address = 0x82FF2180
 
 functions = [
-    { address = 0x82DD4CC0, size = 0x110 },
+ { address = 0x82DD4CC0, size = 0x110 },
     { address = 0x832226F8, size = 0xA4 },
     { address = 0x827FF7C8, size = 0x58 },
     { address = 0x83335820, size = 0x80 },
@@ -138,5 +138,14 @@ functions = [
     { address = 0x82DAD330, size = 0xBC },
     { address = 0x82918330, size = 0x1DC },
     { address = 0x82A9A270, size = 0x90 },
-    { address = 0x82EEBE08, size = 0x100 }
+    { address = 0x82EEBE08, size = 0x100 },
+    { address = 0x82E6E780, size = 0x88 },
+    { address = 0x82EEB8E0, size = 0x1C },
+    { address = 0x82EEB8E8, size = 0x51C }
 ]
+    
+invalid_instructions = [
+   { data = 0x833B7954, size = 8 }
+]
+
+#0x8251ff44 this is where you left off
