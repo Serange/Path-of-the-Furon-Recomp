@@ -1437,10 +1437,6 @@ PPC_FUNC(__imp__NtOpenFile)
     ctx.r3.u32 = 0;  // Success
 }
 
-PPC_FUNC(__imp____C_specific_handler)
-{
-    ctx.r3.u32 = 0;  // Success
-}
 
 PPC_FUNC(__imp__DbgPrint)
 {
