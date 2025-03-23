@@ -1,5 +1,11 @@
 #include "ppc_recomp_shared.h"
 
+__attribute__((alias("__imp__sub_832ABDB4"))) PPC_WEAK_FUNC(sub_832ABDB4);
+PPC_FUNC_IMPL(__imp__sub_832ABDB4) {
+	PPC_FUNC_PROLOGUE();
+	// .long 0x0
+}
+
 __attribute__((alias("__imp__sub_832ABDB8"))) PPC_WEAK_FUNC(sub_832ABDB8);
 PPC_FUNC_IMPL(__imp__sub_832ABDB8) {
 	PPC_FUNC_PROLOGUE();
@@ -11468,27 +11474,6 @@ PPC_FUNC_IMPL(__imp__sub_832B06B0) {
 	PPC_STORE_U32(ctx.r3.u32 + 4, ctx.r10.u32);
 	// stw r11,0(r3)
 	PPC_STORE_U32(ctx.r3.u32 + 0, ctx.r11.u32);
-	// blr 
-	return;
-}
-
-__attribute__((alias("__imp__sub_832B06C8"))) PPC_WEAK_FUNC(sub_832B06C8);
-PPC_FUNC_IMPL(__imp__sub_832B06C8) {
-	PPC_FUNC_PROLOGUE();
-	// lwz r11,4(r3)
-	ctx.r11.u64 = PPC_LOAD_U32(ctx.r3.u32 + 4);
-	// clrlwi. r10,r11,31
-	ctx.r10.u64 = ctx.r11.u32 & 0x1;
-	ctx.cr0.compare<int32_t>(ctx.r10.s32, 0, ctx.xer);
-	// beq 0x832b06d8
-	if (ctx.cr0.eq) goto loc_832B06D8;
-	// li r11,0
-	ctx.r11.s64 = 0;
-loc_832B06D8:
-	// cntlzw r11,r11
-	ctx.r11.u64 = ctx.r11.u32 == 0 ? 32 : __builtin_clz(ctx.r11.u32);
-	// rlwinm r3,r11,27,31,31
-	ctx.r3.u64 = __builtin_rotateleft64(ctx.r11.u32 | (ctx.r11.u64 << 32), 27) & 0x1;
 	// blr 
 	return;
 }

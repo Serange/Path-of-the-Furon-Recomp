@@ -1,5 +1,13 @@
 #include "ppc_recomp_shared.h"
 
+__attribute__((alias("__imp__sub_82FFD4E8"))) PPC_WEAK_FUNC(sub_82FFD4E8);
+PPC_FUNC_IMPL(__imp__sub_82FFD4E8) {
+	PPC_FUNC_PROLOGUE();
+	// b 0x831bd558
+	sub_831BD558(ctx, base);
+	return;
+}
+
 __attribute__((alias("__imp__sub_82FFD4EC"))) PPC_WEAK_FUNC(sub_82FFD4EC);
 PPC_FUNC_IMPL(__imp__sub_82FFD4EC) {
 	PPC_FUNC_PROLOGUE();
@@ -11310,21 +11318,5 @@ __attribute__((alias("__imp__sub_83001714"))) PPC_WEAK_FUNC(sub_83001714);
 PPC_FUNC_IMPL(__imp__sub_83001714) {
 	PPC_FUNC_PROLOGUE();
 	// .long 0x0
-}
-
-__attribute__((alias("__imp__sub_83001718"))) PPC_WEAK_FUNC(sub_83001718);
-PPC_FUNC_IMPL(__imp__sub_83001718) {
-	PPC_FUNC_PROLOGUE();
-	// lwz r3,916(r3)
-	ctx.r3.u64 = PPC_LOAD_U32(ctx.r3.u32 + 916);
-	// lwz r11,0(r3)
-	ctx.r11.u64 = PPC_LOAD_U32(ctx.r3.u32 + 0);
-	// lwz r10,548(r11)
-	ctx.r10.u64 = PPC_LOAD_U32(ctx.r11.u32 + 548);
-	// mtctr r10
-	ctx.ctr.u64 = ctx.r10.u64;
-	// bctr 
-	PPC_CALL_INDIRECT_FUNC(ctx.ctr.u32);
-	return;
 }
 

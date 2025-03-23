@@ -1,5 +1,14 @@
 #include "ppc_recomp_shared.h"
 
+__attribute__((alias("__imp__sub_83332510"))) PPC_WEAK_FUNC(sub_83332510);
+PPC_FUNC_IMPL(__imp__sub_83332510) {
+	PPC_FUNC_PROLOGUE();
+	// li r3,0
+	ctx.r3.s64 = 0;
+	// blr 
+	return;
+}
+
 __attribute__((alias("__imp__sub_83332518"))) PPC_WEAK_FUNC(sub_83332518);
 PPC_FUNC_IMPL(__imp__sub_83332518) {
 	PPC_FUNC_PROLOGUE();
@@ -16017,33 +16026,6 @@ PPC_FUNC_IMPL(__imp__sub_833385F8) {
 	// bl 0x83338408
 	ctx.lr = 0x83338620;
 	sub_83338408(ctx, base);
-	// addi r1,r1,96
-	ctx.r1.s64 = ctx.r1.s64 + 96;
-	// lwz r12,-8(r1)
-	ctx.r12.u64 = PPC_LOAD_U32(ctx.r1.u32 + -8);
-	// mtlr r12
-	ctx.lr = ctx.r12.u64;
-	// blr 
-	return;
-}
-
-__attribute__((alias("__imp__sub_83338630"))) PPC_WEAK_FUNC(sub_83338630);
-PPC_FUNC_IMPL(__imp__sub_83338630) {
-	PPC_FUNC_PROLOGUE();
-	uint32_t ea{};
-	// mflr r12
-	ctx.r12.u64 = ctx.lr;
-	// stw r12,-8(r1)
-	PPC_STORE_U32(ctx.r1.u32 + -8, ctx.r12.u32);
-	// stwu r1,-96(r1)
-	ea = -96 + ctx.r1.u32;
-	PPC_STORE_U32(ea, ctx.r1.u32);
-	ctx.r1.u32 = ea;
-	// bl 0x83338008
-	ctx.lr = 0x83338640;
-	sub_83338008(ctx, base);
-	// rlwinm r3,r3,6,0,25
-	ctx.r3.u64 = __builtin_rotateleft64(ctx.r3.u32 | (ctx.r3.u64 << 32), 6) & 0xFFFFFFC0;
 	// addi r1,r1,96
 	ctx.r1.s64 = ctx.r1.s64 + 96;
 	// lwz r12,-8(r1)

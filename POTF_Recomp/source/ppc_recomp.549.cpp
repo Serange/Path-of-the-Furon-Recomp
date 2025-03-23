@@ -1,5 +1,11 @@
 #include "ppc_recomp_shared.h"
 
+__attribute__((alias("__imp__sub_83198D54"))) PPC_WEAK_FUNC(sub_83198D54);
+PPC_FUNC_IMPL(__imp__sub_83198D54) {
+	PPC_FUNC_PROLOGUE();
+	// .long 0x0
+}
+
 __attribute__((alias("__imp__sub_83198D58"))) PPC_WEAK_FUNC(sub_83198D58);
 PPC_FUNC_IMPL(__imp__sub_83198D58) {
 	PPC_FUNC_PROLOGUE();
@@ -14533,33 +14539,5 @@ __attribute__((alias("__imp__sub_8319E464"))) PPC_WEAK_FUNC(sub_8319E464);
 PPC_FUNC_IMPL(__imp__sub_8319E464) {
 	PPC_FUNC_PROLOGUE();
 	// .long 0x0
-}
-
-__attribute__((alias("__imp__sub_8319E468"))) PPC_WEAK_FUNC(sub_8319E468);
-PPC_FUNC_IMPL(__imp__sub_8319E468) {
-	PPC_FUNC_PROLOGUE();
-	uint32_t ea{};
-	// mflr r12
-	ctx.r12.u64 = ctx.lr;
-	// stw r12,-8(r1)
-	PPC_STORE_U32(ctx.r1.u32 + -8, ctx.r12.u32);
-	// stwu r1,-96(r1)
-	ea = -96 + ctx.r1.u32;
-	PPC_STORE_U32(ea, ctx.r1.u32);
-	ctx.r1.u32 = ea;
-	// bl 0x82cb3d10
-	ctx.lr = 0x8319E478;
-	sub_82CB3D10(ctx, base);
-	// frsp f1,f1
-	ctx.fpscr.disableFlushMode();
-	ctx.f1.f64 = double(float(ctx.f1.f64));
-	// addi r1,r1,96
-	ctx.r1.s64 = ctx.r1.s64 + 96;
-	// lwz r12,-8(r1)
-	ctx.r12.u64 = PPC_LOAD_U32(ctx.r1.u32 + -8);
-	// mtlr r12
-	ctx.lr = ctx.r12.u64;
-	// blr 
-	return;
 }
 

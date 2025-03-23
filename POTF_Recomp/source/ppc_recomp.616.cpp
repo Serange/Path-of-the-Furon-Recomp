@@ -1,5 +1,11 @@
 #include "ppc_recomp_shared.h"
 
+__attribute__((alias("__imp__sub_833AC554"))) PPC_WEAK_FUNC(sub_833AC554);
+PPC_FUNC_IMPL(__imp__sub_833AC554) {
+	PPC_FUNC_PROLOGUE();
+	// .long 0x0
+}
+
 __attribute__((alias("__imp__sub_833AC558"))) PPC_WEAK_FUNC(sub_833AC558);
 PPC_FUNC_IMPL(__imp__sub_833AC558) {
 	PPC_FUNC_PROLOGUE();
@@ -6302,58 +6308,5 @@ __attribute__((alias("__imp__sub_833AE8EC"))) PPC_WEAK_FUNC(sub_833AE8EC);
 PPC_FUNC_IMPL(__imp__sub_833AE8EC) {
 	PPC_FUNC_PROLOGUE();
 	// .long 0x0
-}
-
-__attribute__((alias("__imp__sub_833AE8F0"))) PPC_WEAK_FUNC(sub_833AE8F0);
-PPC_FUNC_IMPL(__imp__sub_833AE8F0) {
-	PPC_FUNC_PROLOGUE();
-	uint32_t ea{};
-	// mflr r12
-	ctx.r12.u64 = ctx.lr;
-	// stw r12,-8(r1)
-	PPC_STORE_U32(ctx.r1.u32 + -8, ctx.r12.u32);
-	// std r31,-16(r1)
-	PPC_STORE_U64(ctx.r1.u32 + -16, ctx.r31.u64);
-	// stwu r1,-96(r1)
-	ea = -96 + ctx.r1.u32;
-	PPC_STORE_U32(ea, ctx.r1.u32);
-	ctx.r1.u32 = ea;
-	// lis r11,-31881
-	ctx.r11.s64 = -2089353216;
-	// addi r31,r11,-11224
-	ctx.r31.s64 = ctx.r11.s64 + -11224;
-	// addi r3,r31,68
-	ctx.r3.s64 = ctx.r31.s64 + 68;
-	// bl 0x82390a48
-	ctx.lr = 0x833AE910;
-	sub_82390A48(ctx, base);
-	// lwz r3,76(r31)
-	ctx.r3.u64 = PPC_LOAD_U32(ctx.r31.u32 + 76);
-	// bl 0x82294a58
-	ctx.lr = 0x833AE918;
-	sub_82294A58(ctx, base);
-	// li r11,0
-	ctx.r11.s64 = 0;
-	// li r10,0
-	ctx.r10.s64 = 0;
-	// stw r11,76(r31)
-	PPC_STORE_U32(ctx.r31.u32 + 76, ctx.r11.u32);
-	// addi r3,r31,40
-	ctx.r3.s64 = ctx.r31.s64 + 40;
-	// stw r10,80(r31)
-	PPC_STORE_U32(ctx.r31.u32 + 80, ctx.r10.u32);
-	// bl 0x823908b8
-	ctx.lr = 0x833AE930;
-	sub_823908B8(ctx, base);
-	// addi r1,r1,96
-	ctx.r1.s64 = ctx.r1.s64 + 96;
-	// lwz r12,-8(r1)
-	ctx.r12.u64 = PPC_LOAD_U32(ctx.r1.u32 + -8);
-	// mtlr r12
-	ctx.lr = ctx.r12.u64;
-	// ld r31,-16(r1)
-	ctx.r31.u64 = PPC_LOAD_U64(ctx.r1.u32 + -16);
-	// blr 
-	return;
 }
 

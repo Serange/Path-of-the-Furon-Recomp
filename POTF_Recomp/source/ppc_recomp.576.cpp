@@ -1,5 +1,12 @@
 #include "ppc_recomp_shared.h"
 
+__attribute__((alias("__imp__sub_832AA948"))) PPC_WEAK_FUNC(sub_832AA948);
+PPC_FUNC_IMPL(__imp__sub_832AA948) {
+	PPC_FUNC_PROLOGUE();
+	// blr 
+	return;
+}
+
 __attribute__((alias("__imp__sub_832AA94C"))) PPC_WEAK_FUNC(sub_832AA94C);
 PPC_FUNC_IMPL(__imp__sub_832AA94C) {
 	PPC_FUNC_PROLOGUE();
@@ -4005,11 +4012,5 @@ PPC_FUNC_IMPL(__imp__sub_832ABD88) {
 	PPC_STORE_U32(ctx.r3.u32 + 0, ctx.r10.u32);
 	// blr 
 	return;
-}
-
-__attribute__((alias("__imp__sub_832ABDB4"))) PPC_WEAK_FUNC(sub_832ABDB4);
-PPC_FUNC_IMPL(__imp__sub_832ABDB4) {
-	PPC_FUNC_PROLOGUE();
-	// .long 0x0
 }
 

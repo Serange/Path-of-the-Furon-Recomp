@@ -1,5 +1,11 @@
 #include "ppc_recomp_shared.h"
 
+__attribute__((alias("__imp__sub_82FC8D1C"))) PPC_WEAK_FUNC(sub_82FC8D1C);
+PPC_FUNC_IMPL(__imp__sub_82FC8D1C) {
+	PPC_FUNC_PROLOGUE();
+	// .long 0x0
+}
+
 __attribute__((alias("__imp__sub_82FC8D20"))) PPC_WEAK_FUNC(sub_82FC8D20);
 PPC_FUNC_IMPL(__imp__sub_82FC8D20) {
 	PPC_FUNC_PROLOGUE();
@@ -13486,19 +13492,5 @@ __attribute__((alias("__imp__sub_82FCE3F4"))) PPC_WEAK_FUNC(sub_82FCE3F4);
 PPC_FUNC_IMPL(__imp__sub_82FCE3F4) {
 	PPC_FUNC_PROLOGUE();
 	// .long 0x0
-}
-
-__attribute__((alias("__imp__sub_82FCE3F8"))) PPC_WEAK_FUNC(sub_82FCE3F8);
-PPC_FUNC_IMPL(__imp__sub_82FCE3F8) {
-	PPC_FUNC_PROLOGUE();
-	// lvx128 v63,r0,r3
-	_mm_store_si128((__m128i*)ctx.v63.u8, _mm_shuffle_epi8(_mm_load_si128((__m128i*)(base + ((ctx.r3.u32) & ~0xF))), _mm_load_si128((__m128i*)VectorMaskL)));
-	// vaddfp128 v62,v63,v1
-	ctx.fpscr.enableFlushMode();
-	_mm_store_ps(ctx.v62.f32, _mm_add_ps(_mm_load_ps(ctx.v63.f32), _mm_load_ps(ctx.v1.f32)));
-	// stvx128 v62,r0,r3
-	_mm_store_si128((__m128i*)(base + ((ctx.r3.u32) & ~0xF)), _mm_shuffle_epi8(_mm_load_si128((__m128i*)ctx.v62.u8), _mm_load_si128((__m128i*)VectorMaskL)));
-	// blr 
-	return;
 }
 

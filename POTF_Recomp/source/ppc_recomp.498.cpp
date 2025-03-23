@@ -1,5 +1,11 @@
 #include "ppc_recomp_shared.h"
 
+__attribute__((alias("__imp__sub_82FECD6C"))) PPC_WEAK_FUNC(sub_82FECD6C);
+PPC_FUNC_IMPL(__imp__sub_82FECD6C) {
+	PPC_FUNC_PROLOGUE();
+	// .long 0x0
+}
+
 __attribute__((alias("__imp__sub_82FECD70"))) PPC_WEAK_FUNC(sub_82FECD70);
 PPC_FUNC_IMPL(__imp__sub_82FECD70) {
 	PPC_FUNC_PROLOGUE();
@@ -21739,41 +21745,6 @@ PPC_FUNC_IMPL(__imp____restvmx_24) {
 	ctx.r11.s64 = -128;
 	// lvx v24,r11,r12
 	_mm_store_si128((__m128i*)ctx.v24.u8, _mm_shuffle_epi8(_mm_load_si128((__m128i*)(base + ((ctx.r11.u32 + ctx.r12.u32) & ~0xF))), _mm_load_si128((__m128i*)VectorMaskL)));
-	// li r11,-112
-	ctx.r11.s64 = -112;
-	// lvx v25,r11,r12
-	_mm_store_si128((__m128i*)ctx.v25.u8, _mm_shuffle_epi8(_mm_load_si128((__m128i*)(base + ((ctx.r11.u32 + ctx.r12.u32) & ~0xF))), _mm_load_si128((__m128i*)VectorMaskL)));
-	// li r11,-96
-	ctx.r11.s64 = -96;
-	// lvx v26,r11,r12
-	_mm_store_si128((__m128i*)ctx.v26.u8, _mm_shuffle_epi8(_mm_load_si128((__m128i*)(base + ((ctx.r11.u32 + ctx.r12.u32) & ~0xF))), _mm_load_si128((__m128i*)VectorMaskL)));
-	// li r11,-80
-	ctx.r11.s64 = -80;
-	// lvx v27,r11,r12
-	_mm_store_si128((__m128i*)ctx.v27.u8, _mm_shuffle_epi8(_mm_load_si128((__m128i*)(base + ((ctx.r11.u32 + ctx.r12.u32) & ~0xF))), _mm_load_si128((__m128i*)VectorMaskL)));
-	// li r11,-64
-	ctx.r11.s64 = -64;
-	// lvx v28,r11,r12
-	_mm_store_si128((__m128i*)ctx.v28.u8, _mm_shuffle_epi8(_mm_load_si128((__m128i*)(base + ((ctx.r11.u32 + ctx.r12.u32) & ~0xF))), _mm_load_si128((__m128i*)VectorMaskL)));
-	// li r11,-48
-	ctx.r11.s64 = -48;
-	// lvx v29,r11,r12
-	_mm_store_si128((__m128i*)ctx.v29.u8, _mm_shuffle_epi8(_mm_load_si128((__m128i*)(base + ((ctx.r11.u32 + ctx.r12.u32) & ~0xF))), _mm_load_si128((__m128i*)VectorMaskL)));
-	// li r11,-32
-	ctx.r11.s64 = -32;
-	// lvx v30,r11,r12
-	_mm_store_si128((__m128i*)ctx.v30.u8, _mm_shuffle_epi8(_mm_load_si128((__m128i*)(base + ((ctx.r11.u32 + ctx.r12.u32) & ~0xF))), _mm_load_si128((__m128i*)VectorMaskL)));
-	// li r11,-16
-	ctx.r11.s64 = -16;
-	// lvx v31,r11,r12
-	_mm_store_si128((__m128i*)ctx.v31.u8, _mm_shuffle_epi8(_mm_load_si128((__m128i*)(base + ((ctx.r11.u32 + ctx.r12.u32) & ~0xF))), _mm_load_si128((__m128i*)VectorMaskL)));
-	// blr 
-	return;
-}
-
-__attribute__((alias("__imp____restvmx_25"))) PPC_WEAK_FUNC(__restvmx_25);
-PPC_FUNC_IMPL(__imp____restvmx_25) {
-	PPC_FUNC_PROLOGUE();
 	// li r11,-112
 	ctx.r11.s64 = -112;
 	// lvx v25,r11,r12

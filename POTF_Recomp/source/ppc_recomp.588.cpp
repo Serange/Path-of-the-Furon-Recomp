@@ -1,5 +1,11 @@
 #include "ppc_recomp_shared.h"
 
+__attribute__((alias("__imp__sub_83322594"))) PPC_WEAK_FUNC(sub_83322594);
+PPC_FUNC_IMPL(__imp__sub_83322594) {
+	PPC_FUNC_PROLOGUE();
+	// .long 0x0
+}
+
 __attribute__((alias("__imp__sub_83322598"))) PPC_WEAK_FUNC(sub_83322598);
 PPC_FUNC_IMPL(__imp__sub_83322598) {
 	PPC_FUNC_PROLOGUE();
@@ -18855,70 +18861,5 @@ __attribute__((alias("__imp__sub_8332A15C"))) PPC_WEAK_FUNC(sub_8332A15C);
 PPC_FUNC_IMPL(__imp__sub_8332A15C) {
 	PPC_FUNC_PROLOGUE();
 	// .long 0x0
-}
-
-__attribute__((alias("__imp__sub_8332A160"))) PPC_WEAK_FUNC(sub_8332A160);
-PPC_FUNC_IMPL(__imp__sub_8332A160) {
-	PPC_FUNC_PROLOGUE();
-	uint32_t ea{};
-	// mflr r12
-	ctx.r12.u64 = ctx.lr;
-	// stw r12,-8(r1)
-	PPC_STORE_U32(ctx.r1.u32 + -8, ctx.r12.u32);
-	// std r30,-24(r1)
-	PPC_STORE_U64(ctx.r1.u32 + -24, ctx.r30.u64);
-	// std r31,-16(r1)
-	PPC_STORE_U64(ctx.r1.u32 + -16, ctx.r31.u64);
-	// stwu r1,-112(r1)
-	ea = -112 + ctx.r1.u32;
-	PPC_STORE_U32(ea, ctx.r1.u32);
-	ctx.r1.u32 = ea;
-	// mr r31,r4
-	ctx.r31.u64 = ctx.r4.u64;
-	// mr r30,r3
-	ctx.r30.u64 = ctx.r3.u64;
-	// cmpwi cr6,r31,0
-	ctx.cr6.compare<int32_t>(ctx.r31.s32, 0, ctx.xer);
-	// blt cr6,0x8332a18c
-	if (ctx.cr6.lt) goto loc_8332A18C;
-	// cmpwi cr6,r31,4
-	ctx.cr6.compare<int32_t>(ctx.r31.s32, 4, ctx.xer);
-	// blt cr6,0x8332a1b0
-	if (ctx.cr6.lt) goto loc_8332A1B0;
-loc_8332A18C:
-	// lis r11,-32246
-	ctx.r11.s64 = -2113273856;
-	// lis r10,-32246
-	ctx.r10.s64 = -2113273856;
-	// lis r9,-32247
-	ctx.r9.s64 = -2113339392;
-	// addi r6,r11,-32768
-	ctx.r6.s64 = ctx.r11.s64 + -32768;
-	// addi r5,r10,-28224
-	ctx.r5.s64 = ctx.r10.s64 + -28224;
-	// addi r4,r9,-21168
-	ctx.r4.s64 = ctx.r9.s64 + -21168;
-	// li r7,190
-	ctx.r7.s64 = 190;
-	// li r3,0
-	ctx.r3.s64 = 0;
-	// bl 0x8320cf10
-	ctx.lr = 0x8332A1B0;
-	sub_8320CF10(ctx, base);
-loc_8332A1B0:
-	// lbzx r3,r31,r30
-	ctx.r3.u64 = PPC_LOAD_U8(ctx.r31.u32 + ctx.r30.u32);
-	// addi r1,r1,112
-	ctx.r1.s64 = ctx.r1.s64 + 112;
-	// lwz r12,-8(r1)
-	ctx.r12.u64 = PPC_LOAD_U32(ctx.r1.u32 + -8);
-	// mtlr r12
-	ctx.lr = ctx.r12.u64;
-	// ld r30,-24(r1)
-	ctx.r30.u64 = PPC_LOAD_U64(ctx.r1.u32 + -24);
-	// ld r31,-16(r1)
-	ctx.r31.u64 = PPC_LOAD_U64(ctx.r1.u32 + -16);
-	// blr 
-	return;
 }
 

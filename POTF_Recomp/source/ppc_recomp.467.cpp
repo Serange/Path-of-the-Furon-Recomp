@@ -1,5 +1,27 @@
 #include "ppc_recomp_shared.h"
 
+__attribute__((alias("__imp__sub_82E85FA8"))) PPC_WEAK_FUNC(sub_82E85FA8);
+PPC_FUNC_IMPL(__imp__sub_82E85FA8) {
+	PPC_FUNC_PROLOGUE();
+	// b 0x82e85330
+	sub_82E85330(ctx, base);
+	return;
+}
+
+__attribute__((alias("__imp__sub_82E85FAC"))) PPC_WEAK_FUNC(sub_82E85FAC);
+PPC_FUNC_IMPL(__imp__sub_82E85FAC) {
+	PPC_FUNC_PROLOGUE();
+	// .long 0x0
+}
+
+__attribute__((alias("__imp__sub_82E85FB0"))) PPC_WEAK_FUNC(sub_82E85FB0);
+PPC_FUNC_IMPL(__imp__sub_82E85FB0) {
+	PPC_FUNC_PROLOGUE();
+	// b 0x82e84b90
+	sub_82E84B90(ctx, base);
+	return;
+}
+
 __attribute__((alias("__imp__sub_82E85FB4"))) PPC_WEAK_FUNC(sub_82E85FB4);
 PPC_FUNC_IMPL(__imp__sub_82E85FB4) {
 	PPC_FUNC_PROLOGUE();
@@ -13702,51 +13724,6 @@ PPC_FUNC_IMPL(__imp__sub_82E8B510) {
 	ctx.r30.u64 = PPC_LOAD_U64(ctx.r1.u32 + -24);
 	// ld r31,-16(r1)
 	ctx.r31.u64 = PPC_LOAD_U64(ctx.r1.u32 + -16);
-	// blr 
-	return;
-}
-
-__attribute__((alias("__imp__sub_82E8B554"))) PPC_WEAK_FUNC(sub_82E8B554);
-PPC_FUNC_IMPL(__imp__sub_82E8B554) {
-	PPC_FUNC_PROLOGUE();
-	// .long 0x0
-}
-
-__attribute__((alias("__imp__sub_82E8B558"))) PPC_WEAK_FUNC(sub_82E8B558);
-PPC_FUNC_IMPL(__imp__sub_82E8B558) {
-	PPC_FUNC_PROLOGUE();
-	// lwz r3,4(r3)
-	ctx.r3.u64 = PPC_LOAD_U32(ctx.r3.u32 + 4);
-	// blr 
-	return;
-}
-
-__attribute__((alias("__imp__sub_82E8B560"))) PPC_WEAK_FUNC(sub_82E8B560);
-PPC_FUNC_IMPL(__imp__sub_82E8B560) {
-	PPC_FUNC_PROLOGUE();
-	// lwz r11,4(r3)
-	ctx.r11.u64 = PPC_LOAD_U32(ctx.r3.u32 + 4);
-	// li r3,0
-	ctx.r3.s64 = 0;
-	// cmpwi cr6,r11,8
-	ctx.cr6.compare<int32_t>(ctx.r11.s32, 8, ctx.xer);
-	// beq cr6,0x82e8b588
-	if (ctx.cr6.eq) goto loc_82E8B588;
-	// cmpwi cr6,r11,9
-	ctx.cr6.compare<int32_t>(ctx.r11.s32, 9, ctx.xer);
-	// beq cr6,0x82e8b588
-	if (ctx.cr6.eq) goto loc_82E8B588;
-	// cmpwi cr6,r11,10
-	ctx.cr6.compare<int32_t>(ctx.r11.s32, 10, ctx.xer);
-	// bnelr cr6
-	if (!ctx.cr6.eq) return;
-	// li r3,24
-	ctx.r3.s64 = 24;
-	// blr 
-	return;
-loc_82E8B588:
-	// li r3,4
-	ctx.r3.s64 = 4;
 	// blr 
 	return;
 }

@@ -1,5 +1,63 @@
 #include "ppc_recomp_shared.h"
 
+__attribute__((alias("__imp__sub_831C8518"))) PPC_WEAK_FUNC(sub_831C8518);
+PPC_FUNC_IMPL(__imp__sub_831C8518) {
+	PPC_FUNC_PROLOGUE();
+	PPCRegister temp{};
+	// li r9,12
+	ctx.r9.s64 = 12;
+	// lvx128 v63,r0,r4
+	_mm_store_si128((__m128i*)ctx.v63.u8, _mm_shuffle_epi8(_mm_load_si128((__m128i*)(base + ((ctx.r4.u32) & ~0xF))), _mm_load_si128((__m128i*)VectorMaskL)));
+	// addi r11,r3,76
+	ctx.r11.s64 = ctx.r3.s64 + 76;
+	// lvx128 v62,r0,r5
+	_mm_store_si128((__m128i*)ctx.v62.u8, _mm_shuffle_epi8(_mm_load_si128((__m128i*)(base + ((ctx.r5.u32) & ~0xF))), _mm_load_si128((__m128i*)VectorMaskL)));
+	// addi r10,r3,88
+	ctx.r10.s64 = ctx.r3.s64 + 88;
+	// vspltisw128 v61,0
+	_mm_store_si128((__m128i*)ctx.v61.u32, _mm_set1_epi32(int(0x0)));
+	// lvrx128 v60,r9,r11
+	temp.u32 = ctx.r9.u32 + ctx.r11.u32;
+	_mm_store_si128((__m128i*)ctx.v60.u8, temp.u32 & 0xF ? _mm_shuffle_epi8(_mm_load_si128((__m128i*)(base + (temp.u32 & ~0xF))), _mm_load_si128((__m128i*)&VectorMaskR[(temp.u32 & 0xF) * 16])) : _mm_setzero_si128());
+	// vpermwi128 v59,v61,24
+	_mm_store_si128((__m128i*)ctx.v59.u32, _mm_shuffle_epi32(_mm_load_si128((__m128i*)ctx.v61.u32), 0xE7));
+	// lvrx128 v58,r9,r10
+	temp.u32 = ctx.r9.u32 + ctx.r10.u32;
+	_mm_store_si128((__m128i*)ctx.v58.u8, temp.u32 & 0xF ? _mm_shuffle_epi8(_mm_load_si128((__m128i*)(base + (temp.u32 & ~0xF))), _mm_load_si128((__m128i*)&VectorMaskR[(temp.u32 & 0xF) * 16])) : _mm_setzero_si128());
+	// vsldoi128 v57,v60,v60,4
+	_mm_store_si128((__m128i*)ctx.v57.u8, _mm_alignr_epi8(_mm_load_si128((__m128i*)ctx.v60.u8), _mm_load_si128((__m128i*)ctx.v60.u8), 12));
+	// vsldoi128 v56,v58,v58,4
+	_mm_store_si128((__m128i*)ctx.v56.u8, _mm_alignr_epi8(_mm_load_si128((__m128i*)ctx.v58.u8), _mm_load_si128((__m128i*)ctx.v58.u8), 12));
+	// lvlx128 v55,r0,r11
+	temp.u32 = ctx.r11.u32;
+	_mm_store_si128((__m128i*)ctx.v55.u8, _mm_shuffle_epi8(_mm_load_si128((__m128i*)(base + (temp.u32 & ~0xF))), _mm_load_si128((__m128i*)&VectorMaskL[(temp.u32 & 0xF) * 16])));
+	// lvlx128 v54,r0,r10
+	temp.u32 = ctx.r10.u32;
+	_mm_store_si128((__m128i*)ctx.v54.u8, _mm_shuffle_epi8(_mm_load_si128((__m128i*)(base + (temp.u32 & ~0xF))), _mm_load_si128((__m128i*)&VectorMaskL[(temp.u32 & 0xF) * 16])));
+	// vor128 v53,v55,v57
+	_mm_store_si128((__m128i*)ctx.v53.u8, _mm_or_si128(_mm_load_si128((__m128i*)ctx.v55.u8), _mm_load_si128((__m128i*)ctx.v57.u8)));
+	// vor128 v52,v54,v56
+	_mm_store_si128((__m128i*)ctx.v52.u8, _mm_or_si128(_mm_load_si128((__m128i*)ctx.v54.u8), _mm_load_si128((__m128i*)ctx.v56.u8)));
+	// vcmpgtfp128 v51,v53,v62
+	ctx.fpscr.enableFlushMode();
+	_mm_store_ps(ctx.v51.f32, _mm_cmpgt_ps(_mm_load_ps(ctx.v53.f32), _mm_load_ps(ctx.v62.f32)));
+	// vcmpgtfp128 v50,v63,v52
+	_mm_store_ps(ctx.v50.f32, _mm_cmpgt_ps(_mm_load_ps(ctx.v63.f32), _mm_load_ps(ctx.v52.f32)));
+	// vor128 v49,v51,v50
+	_mm_store_si128((__m128i*)ctx.v49.u8, _mm_or_si128(_mm_load_si128((__m128i*)ctx.v51.u8), _mm_load_si128((__m128i*)ctx.v50.u8)));
+	// vpermwi128 v48,v49,24
+	_mm_store_si128((__m128i*)ctx.v48.u32, _mm_shuffle_epi32(_mm_load_si128((__m128i*)ctx.v49.u32), 0xE7));
+	// vcmpequw128. v47,v48,v59
+	_mm_store_si128((__m128i*)ctx.v47.u8, _mm_cmpeq_epi32(_mm_load_si128((__m128i*)ctx.v48.u32), _mm_load_si128((__m128i*)ctx.v59.u32)));
+	ctx.cr6.setFromMask(_mm_load_ps(ctx.v47.f32), 0xF);
+	// mfocrf r11,2
+	ctx.r11.u64 = (ctx.cr6.lt << 7) | (ctx.cr6.gt << 6) | (ctx.cr6.eq << 5) | (ctx.cr6.so << 4);
+	// rlwinm r3,r11,25,31,31
+	ctx.r3.u64 = __builtin_rotateleft64(ctx.r11.u32 | (ctx.r11.u64 << 32), 25) & 0x1;
+	// blr 
+	return;
+}
+
 __attribute__((alias("__imp__sub_831C8574"))) PPC_WEAK_FUNC(sub_831C8574);
 PPC_FUNC_IMPL(__imp__sub_831C8574) {
 	PPC_FUNC_PROLOGUE();
@@ -63116,11 +63174,5 @@ loc_831E2D8C:
 	ctx.r31.u64 = PPC_LOAD_U64(ctx.r1.u32 + -16);
 	// blr 
 	return;
-}
-
-__attribute__((alias("__imp__sub_831E2DA4"))) PPC_WEAK_FUNC(sub_831E2DA4);
-PPC_FUNC_IMPL(__imp__sub_831E2DA4) {
-	PPC_FUNC_PROLOGUE();
-	// .long 0x0
 }
 

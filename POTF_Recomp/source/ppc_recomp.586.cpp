@@ -1,5 +1,14 @@
 #include "ppc_recomp_shared.h"
 
+__attribute__((alias("__imp__sub_83314A90"))) PPC_WEAK_FUNC(sub_83314A90);
+PPC_FUNC_IMPL(__imp__sub_83314A90) {
+	PPC_FUNC_PROLOGUE();
+	// lwz r3,8(r3)
+	ctx.r3.u64 = PPC_LOAD_U32(ctx.r3.u32 + 8);
+	// blr 
+	return;
+}
+
 __attribute__((alias("__imp__sub_83314A98"))) PPC_WEAK_FUNC(sub_83314A98);
 PPC_FUNC_IMPL(__imp__sub_83314A98) {
 	PPC_FUNC_PROLOGUE();
@@ -19464,29 +19473,6 @@ PPC_FUNC_IMPL(__imp__sub_8331C908) {
 	ctx.r11.u64 = ctx.r10.u64 | ctx.r11.u64;
 	// stw r11,0(r3)
 	PPC_STORE_U32(ctx.r3.u32 + 0, ctx.r11.u32);
-	// blr 
-	return;
-}
-
-__attribute__((alias("__imp__sub_8331C930"))) PPC_WEAK_FUNC(sub_8331C930);
-PPC_FUNC_IMPL(__imp__sub_8331C930) {
-	PPC_FUNC_PROLOGUE();
-	// lbz r11,0(r4)
-	ctx.r11.u64 = PPC_LOAD_U8(ctx.r4.u32 + 0);
-	// stb r11,0(r3)
-	PPC_STORE_U8(ctx.r3.u32 + 0, ctx.r11.u8);
-	// lbz r11,1(r4)
-	ctx.r11.u64 = PPC_LOAD_U8(ctx.r4.u32 + 1);
-	// stb r11,1(r3)
-	PPC_STORE_U8(ctx.r3.u32 + 1, ctx.r11.u8);
-	// lbz r11,2(r4)
-	ctx.r11.u64 = PPC_LOAD_U8(ctx.r4.u32 + 2);
-	// stb r11,2(r3)
-	PPC_STORE_U8(ctx.r3.u32 + 2, ctx.r11.u8);
-	// lbz r11,3(r4)
-	ctx.r11.u64 = PPC_LOAD_U8(ctx.r4.u32 + 3);
-	// stb r11,3(r3)
-	PPC_STORE_U8(ctx.r3.u32 + 3, ctx.r11.u8);
 	// blr 
 	return;
 }

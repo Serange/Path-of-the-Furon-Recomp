@@ -1,5 +1,11 @@
 #include "ppc_recomp_shared.h"
 
+__attribute__((alias("__imp__sub_831EA014"))) PPC_WEAK_FUNC(sub_831EA014);
+PPC_FUNC_IMPL(__imp__sub_831EA014) {
+	PPC_FUNC_PROLOGUE();
+	// .long 0x0
+}
+
 __attribute__((alias("__imp__sub_831EA018"))) PPC_WEAK_FUNC(sub_831EA018);
 PPC_FUNC_IMPL(__imp__sub_831EA018) {
 	PPC_FUNC_PROLOGUE();
@@ -21307,11 +21313,5 @@ loc_831F271C:
 	// b 0x82cb1138
 	__restgprlr_28(ctx, base);
 	return;
-}
-
-__attribute__((alias("__imp__sub_831F2724"))) PPC_WEAK_FUNC(sub_831F2724);
-PPC_FUNC_IMPL(__imp__sub_831F2724) {
-	PPC_FUNC_PROLOGUE();
-	// .long 0x0
 }
 

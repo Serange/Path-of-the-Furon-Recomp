@@ -1,5 +1,19 @@
 #include "ppc_recomp_shared.h"
 
+__attribute__((alias("__imp__sub_82FCE3F8"))) PPC_WEAK_FUNC(sub_82FCE3F8);
+PPC_FUNC_IMPL(__imp__sub_82FCE3F8) {
+	PPC_FUNC_PROLOGUE();
+	// lvx128 v63,r0,r3
+	_mm_store_si128((__m128i*)ctx.v63.u8, _mm_shuffle_epi8(_mm_load_si128((__m128i*)(base + ((ctx.r3.u32) & ~0xF))), _mm_load_si128((__m128i*)VectorMaskL)));
+	// vaddfp128 v62,v63,v1
+	ctx.fpscr.enableFlushMode();
+	_mm_store_ps(ctx.v62.f32, _mm_add_ps(_mm_load_ps(ctx.v63.f32), _mm_load_ps(ctx.v1.f32)));
+	// stvx128 v62,r0,r3
+	_mm_store_si128((__m128i*)(base + ((ctx.r3.u32) & ~0xF)), _mm_shuffle_epi8(_mm_load_si128((__m128i*)ctx.v62.u8), _mm_load_si128((__m128i*)VectorMaskL)));
+	// blr 
+	return;
+}
+
 __attribute__((alias("__imp__sub_82FCE408"))) PPC_WEAK_FUNC(sub_82FCE408);
 PPC_FUNC_IMPL(__imp__sub_82FCE408) {
 	PPC_FUNC_PROLOGUE();
@@ -13252,76 +13266,5 @@ __attribute__((alias("__imp__sub_82FD3854"))) PPC_WEAK_FUNC(sub_82FD3854);
 PPC_FUNC_IMPL(__imp__sub_82FD3854) {
 	PPC_FUNC_PROLOGUE();
 	// .long 0x0
-}
-
-__attribute__((alias("__imp__sub_82FD3858"))) PPC_WEAK_FUNC(sub_82FD3858);
-PPC_FUNC_IMPL(__imp__sub_82FD3858) {
-	PPC_FUNC_PROLOGUE();
-	PPCRegister temp{};
-	uint32_t ea{};
-	// mr r11,r6
-	ctx.r11.u64 = ctx.r6.u64;
-	// mr r8,r3
-	ctx.r8.u64 = ctx.r3.u64;
-	// mr r10,r4
-	ctx.r10.u64 = ctx.r4.u64;
-	// mr r9,r5
-	ctx.r9.u64 = ctx.r5.u64;
-	// cmplwi cr6,r11,0
-	ctx.cr6.compare<uint32_t>(ctx.r11.u32, 0, ctx.xer);
-	// beqlr cr6
-	if (ctx.cr6.eq) return;
-	// vspltisw128 v63,0
-	_mm_store_si128((__m128i*)ctx.v63.u32, _mm_set1_epi32(int(0x0)));
-	// vspltisb v0,1
-	_mm_store_si128((__m128i*)ctx.v0.u8, _mm_set1_epi8(char(0x1)));
-	// vsubfp128 v62,v63,v2
-	ctx.fpscr.enableFlushMode();
-	_mm_store_ps(ctx.v62.f32, _mm_sub_ps(_mm_load_ps(ctx.v63.f32), _mm_load_ps(ctx.v2.f32)));
-	// vsr v13,v1,v0
-	_mm_store_si128((__m128i*)ctx.v13.u8, _mm_vsr(_mm_load_si128((__m128i*)ctx.v1.u8), _mm_load_si128((__m128i*)ctx.v0.u8)));
-	// vcuxwfp128 v61,v13,31
-	_mm_store_ps(ctx.v61.f32, _mm_mul_ps(_mm_cvtepu32_ps_(_mm_load_si128((__m128i*)ctx.v13.u32)), _mm_castsi128_ps(_mm_set1_epi32(int(0x30000000)))));
-	// vsldoi128 v60,v2,v62,4
-	_mm_store_si128((__m128i*)ctx.v60.u8, _mm_alignr_epi8(_mm_load_si128((__m128i*)ctx.v2.u8), _mm_load_si128((__m128i*)ctx.v62.u8), 12));
-	// vmulfp128 v59,v61,v60
-	_mm_store_ps(ctx.v59.f32, _mm_mul_ps(_mm_load_ps(ctx.v61.f32), _mm_load_ps(ctx.v60.f32)));
-	// vsldoi128 v63,v59,v2,8
-	_mm_store_si128((__m128i*)ctx.v63.u8, _mm_alignr_epi8(_mm_load_si128((__m128i*)ctx.v59.u8), _mm_load_si128((__m128i*)ctx.v2.u8), 8));
-loc_82FD3890:
-	// lvlx128 v58,r0,r10
-	temp.u32 = ctx.r10.u32;
-	_mm_store_si128((__m128i*)ctx.v58.u8, _mm_shuffle_epi8(_mm_load_si128((__m128i*)(base + (temp.u32 & ~0xF))), _mm_load_si128((__m128i*)&VectorMaskL[(temp.u32 & 0xF) * 16])));
-	// addic. r11,r11,-1
-	ctx.xer.ca = ctx.r11.u32 > 0;
-	ctx.r11.s64 = ctx.r11.s64 + -1;
-	ctx.cr0.compare<int32_t>(ctx.r11.s32, 0, ctx.xer);
-	// vupkhsb128 v57,v58,v96
-	_mm_store_si128((__m128i*)ctx.v57.s32, _mm_cvtepi16_epi32(_mm_unpackhi_epi64(_mm_load_si128((__m128i*)ctx.v58.s16), _mm_load_si128((__m128i*)ctx.v58.s16))));
-	// lvlx128 v56,r0,r9
-	temp.u32 = ctx.r9.u32;
-	_mm_store_si128((__m128i*)ctx.v56.u8, _mm_shuffle_epi8(_mm_load_si128((__m128i*)(base + (temp.u32 & ~0xF))), _mm_load_si128((__m128i*)&VectorMaskL[(temp.u32 & 0xF) * 16])));
-	// vspltw128 v55,v56,0
-	_mm_store_si128((__m128i*)ctx.v55.u32, _mm_shuffle_epi32(_mm_load_si128((__m128i*)ctx.v56.u32), 0xFF));
-	// addi r10,r10,2
-	ctx.r10.s64 = ctx.r10.s64 + 2;
-	// addi r9,r9,4
-	ctx.r9.s64 = ctx.r9.s64 + 4;
-	// vcsxwfp128 v54,v57,15
-	ctx.fpscr.enableFlushMode();
-	_mm_store_ps(ctx.v54.f32, _mm_mul_ps(_mm_cvtepi32_ps(_mm_load_si128((__m128i*)ctx.v57.u32)), _mm_castsi128_ps(_mm_set1_epi32(int(0x38000000)))));
-	// vrlimi128 v55,v54,8,0
-	_mm_store_ps(ctx.v55.f32, _mm_blend_ps(_mm_load_ps(ctx.v55.f32), _mm_permute_ps(_mm_load_ps(ctx.v54.f32), 228), 8));
-	// vmsum3fp128 v53,v55,v63
-	_mm_store_ps(ctx.v53.f32, _mm_dp_ps(_mm_load_ps(ctx.v55.f32), _mm_load_ps(ctx.v63.f32), 0xEF));
-	// stvewx128 v53,r0,r8
-	ea = (ctx.r8.u32) & ~0x3;
-	PPC_STORE_U32(ea, ctx.v53.u32[3 - ((ea & 0xF) >> 2)]);
-	// addi r8,r8,1024
-	ctx.r8.s64 = ctx.r8.s64 + 1024;
-	// bne 0x82fd3890
-	if (!ctx.cr0.eq) goto loc_82FD3890;
-	// blr 
-	return;
 }
 

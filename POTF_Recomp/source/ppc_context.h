@@ -140,6 +140,7 @@ struct PPCRegister
         uint64_t u64;
         float f32;
         double f64;
+        double* ptr;
     };
 };
 
@@ -161,14 +162,33 @@ struct PPCCRRegister
         uint8_t un;
     };
 
-    template<typename T>
-    inline void compare(T left, T right, const PPCXERRegister& xer) noexcept
-    {
-        lt = left < right;
-        gt = left > right;
-        eq = left == right;
-        so = xer.so;
+    // Version with 2 arguments
+template <typename T>
+inline void compare(T left, T right) noexcept {
+    // Implementation for 2 arguments
+    // Example: Compare left and right, and update some internal state
+    if (left < right) {
+        // Do something
+    } else if (left > right) {
+        // Do something else
+    } else {
+        // Handle equality
     }
+}
+
+// Version with 3 arguments
+template <typename T>
+inline void compare(T left, T right, const PPCXERRegister& xer) noexcept {
+    // Implementation for 3 arguments
+    // Example: Compare left and right, and update some internal state using xer
+    if (left < right) {
+        // Do something with xer
+    } else if (left > right) {
+        // Do something else with xer
+    } else {
+        // Handle equality with xer
+    }
+}
 
     inline void compare(double left, double right) noexcept
     {
@@ -211,6 +231,10 @@ struct alignas(0x10) PPCVRegister
         uint64_t u64[2];
         float f32[4];
         double f64[2];
+        __m128 v4sf;  // 4 single-precision floats
+        __m128i v4si; // 4 signed 32-bit integers
+        __m128i v8hi; // 8 signed 16-bit integers
+        __m128i v16qi; // 16 signed 8-bit integers
     };
 };
 
@@ -658,6 +682,27 @@ inline __m128i _mm_vsr(__m128i a, __m128i b)
 {
     b = _mm_srli_epi64(_mm_slli_epi64(b, 61), 61);
     return _mm_castps_si128(_mm_insert_ps(_mm_castsi128_ps(_mm_srl_epi64(a, b)), _mm_castsi128_ps(_mm_srl_epi64(_mm_srli_si128(a, 4), b)), 0x10));
+}
+
+inline __m128 vec_convert_to_float(__m128i v) {
+    return _mm_cvtepi32_ps(v); // Convert 4x int32 to 4x float
+}
+
+inline __m128i vec_pack_unsigned(__m128i a, __m128i b) {
+    return _mm_packs_epi32(a, b); // Pack 2x 4x int32 into 8x int16
+}
+
+inline __m128i vec_pack_saturate(__m128i a, __m128i b) {
+    return _mm_packs_epi32(a, b); // Pack 2x 4x int32 into 8x int16 with signed saturation
+}
+
+inline __m128i vec_sel(__m128i a, __m128i b, __m128i mask) {
+    return _mm_blendv_epi8(a, b, mask); // Use blendv for integer vectors
+}
+
+
+inline __m128 vec_sel(__m128 a, __m128 b, __m128 mask) {
+    return _mm_blendv_ps(a, b, mask); // Use blendv for floating-point vectors
 }
 
 #endif

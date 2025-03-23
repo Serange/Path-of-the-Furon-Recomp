@@ -1,5 +1,32 @@
 #include "ppc_recomp_shared.h"
 
+__attribute__((alias("__imp__sub_83338630"))) PPC_WEAK_FUNC(sub_83338630);
+PPC_FUNC_IMPL(__imp__sub_83338630) {
+	PPC_FUNC_PROLOGUE();
+	uint32_t ea{};
+	// mflr r12
+	ctx.r12.u64 = ctx.lr;
+	// stw r12,-8(r1)
+	PPC_STORE_U32(ctx.r1.u32 + -8, ctx.r12.u32);
+	// stwu r1,-96(r1)
+	ea = -96 + ctx.r1.u32;
+	PPC_STORE_U32(ea, ctx.r1.u32);
+	ctx.r1.u32 = ea;
+	// bl 0x83338008
+	ctx.lr = 0x83338640;
+	sub_83338008(ctx, base);
+	// rlwinm r3,r3,6,0,25
+	ctx.r3.u64 = __builtin_rotateleft64(ctx.r3.u32 | (ctx.r3.u64 << 32), 6) & 0xFFFFFFC0;
+	// addi r1,r1,96
+	ctx.r1.s64 = ctx.r1.s64 + 96;
+	// lwz r12,-8(r1)
+	ctx.r12.u64 = PPC_LOAD_U32(ctx.r1.u32 + -8);
+	// mtlr r12
+	ctx.lr = ctx.r12.u64;
+	// blr 
+	return;
+}
+
 __attribute__((alias("__imp__sub_83338654"))) PPC_WEAK_FUNC(sub_83338654);
 PPC_FUNC_IMPL(__imp__sub_83338654) {
 	PPC_FUNC_PROLOGUE();
@@ -16742,11 +16769,5 @@ loc_8333EE1C:
 	// b 0x82cb1134
 	__restgprlr_27(ctx, base);
 	return;
-}
-
-__attribute__((alias("__imp__sub_8333EE34"))) PPC_WEAK_FUNC(sub_8333EE34);
-PPC_FUNC_IMPL(__imp__sub_8333EE34) {
-	PPC_FUNC_PROLOGUE();
-	// .long 0x0
 }
 
