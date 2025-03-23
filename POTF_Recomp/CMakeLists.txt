@@ -12,12 +12,12 @@ set(CMAKE_CXX_COMPILER clang++)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mssse3 -msse4.1 -mavx")
 
 # Automatically find all .cpp source files in the sources directory
-file(GLOB SOURCES "sources/*.cpp")
+file(GLOB SOURCES "source/*.cpp")
 
 set(HEADERS
-    "sources/ppc_context.h"
-    "sources/ppc_config.h"
-    "sources/ppc_recomp_shared.h"
+    "source/ppc_context.h"
+    "source/ppc_config.h"
+    "source/ppc_recomp_shared.h"
 )
 
 
